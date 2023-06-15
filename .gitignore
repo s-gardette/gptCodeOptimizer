@@ -1,0 +1,13 @@
+venv
+input/**/*.*
+!input/.gitkeep
+output/**/*.*
+!output/.gitkeep
+__pycache__
+errors.txt
+missing_imports.txt
+failed-files.txt
+errors.txt
+
+.env
+.DS_Store
