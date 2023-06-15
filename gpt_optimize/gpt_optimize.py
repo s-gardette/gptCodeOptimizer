@@ -4,9 +4,10 @@ from .openai_helper import OpenAiHelper
 
 
 class CodeProcessor:
-    def __init__(self, logger, model="gpt-3.5-turbo-0613"):
+    def __init__(self, logger, model="gpt-3.5-turbo-0613", tests=False):
         self.logger = logger
         self.model = model
+        self.tests = tests
         self.openai = OpenAiHelper(self.model, self.logger)
         self.missing_imports = MissingImport(logger=self.logger)
 
@@ -38,6 +39,8 @@ class CodeProcessor:
             self.missing_imports.create(
                 input_path, output_path, codebase_path, optimised_code
             )
+        if self.tests:
+            self.create_test_file(output_path, optimised_code)
 
     def process_directory(
         self,
@@ -94,6 +97,7 @@ class CodeProcessor:
         return new_path
 
     def create_test_file(self, path, code, compressed=False):
+        self.logger.info(f"Generating tests for: {path}")
         test_code = self.openai.process_code(
             code, "generate_test", compressed=compressed
         )

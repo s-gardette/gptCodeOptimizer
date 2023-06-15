@@ -31,6 +31,19 @@ def parse_args():
         default=os.getenv("DEBUG", False),
     )
 
+    parser.add_argument(
+        "--extensions",
+        action="store_true",
+        help="Add comma separated list of allowed extensions",
+        default=os.getenv("ALLOWED_EXTENSIONS", False),
+    )
+
+    parser.add_argument(
+        "--tests",
+        action="store_true",
+        help="Generate tests for the code",
+    )
+
     return parser.parse_args()
 
 
@@ -45,10 +58,16 @@ def main(args):
     print("Input path:", args.input)
     print("Output path:", args.output)
     print("Codebase path:", args.codebase_path)
+    print("Allowed extensions:", args.extensions)
 
-    processor = CodeProcessor(logger=logging, model="gpt-3.5-turbo-0613")
+    processor = CodeProcessor(
+        logger=logging, model="gpt-3.5-turbo-0613", tests=args.tests
+    )
     processor.process_directory(
-        args.input, args.output, code_base_path=args.codebase_path
+        args.input,
+        args.output,
+        code_base_path=args.codebase_path,
+        allowed_extensions=args.extensions.split(",") if args.extensions else None,
     )
 
 
