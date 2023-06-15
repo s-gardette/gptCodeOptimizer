@@ -8,8 +8,16 @@
 - **Debugging Support**: Includes a debug mode for detailed logging.
 - **Directory Processing**: Can process entire directories of code files.
 - **File Saving**: Saves the optimized code to a specified location.
-- **Missing Import Handling**: Creates missing imports for a given codebase.
-- **Test File Generation**: Automatically generates test files for the processed code.
+- **Missing Import Handling**: Track missing imports for a given codebase.
+- **Test File Generation**: Automatically generates test files for the processed code. (in progress)
+
+## Installation
+
+To install all the dependencies, you can use pip:
+
+```sh
+pip install -r requirements.txt
+```
 
 ## How to use
 
@@ -52,14 +60,6 @@ You can also specify a path to your project's codebase with `--codebase_path`.
 - OpenAI API Key.
 - Dotenv Python library for loading environment variables.
 - Other dependencies as mentioned in the `requirements.txt`.
-
-## Installation
-
-To install all the dependencies, you can use pip:
-
-```sh
-pip install -r requirements.txt
-```
 
 ## Contributing
 
